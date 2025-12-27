@@ -1,16 +1,9 @@
-# Timekeeper
+# Ripple
 
-A clock generator eurorack module based on the Upduino open source FPGA development board (FPGA: Lattic UltraPlus ICE40UP5K)
+A envelope generator eurorack module with generates a modified ADSR envelope.
 
-Logic outputs are clock square-waves with frequencies x1, x2, x3, x4, x5, x8, x16, /2, /3, /4, /5, /8, /16 a master signal. The master frequency and duty cycle of the signals are 
-controlled by potentiometers read by a 10-bit ADC. A switch changes the master frequency control between the potentiometer and an input logic signal.
 
 ## TO DO
-Tune adc period/duty offset & scale factors
-
-Could improve div line synchronization by using a different method to track periods & duty cycle. For mul_x, generate a list of length 2*x, where for even number indices i, the
-value is i/2 * div_x_period, and for odd indices the value is i/2 * div_x_period + div_x_duty, and compare the value of div_x_counter to the values in the array to control the 
-output div_x. Keep the sync logic with div_x_reps.
 
 
 ## Build instruction
@@ -39,12 +32,6 @@ SPI controller testbench:
     ./obj_dir/Vspi_controller_tb
     gtkwave waveform.vcd
 
-Clock divider testbench:
-    verilator -cc tb/clk_div_tb.v
-    verilator -Wall --trace -cc tb/clk_div_tb.v --exe tb/tb_div.cpp
-    make -C obj_dir -f Vclk_div_tb.mk Vclk_div_tb
-    ./obj_dir/Vclk_div_tb
-    gtkwave waveform.vcd
 
 ## Documentation
 
